@@ -2,3 +2,4 @@ build/
 tls.cert
 tls.key
 bundles/*.zst
+zarf-sbom/

@@ -27,6 +27,7 @@ components:
     images:
       - quay.io/metallb/speaker:v0.14.5
       - quay.io/metallb/controller:v0.14.5
+      - quay.io/frrouting/frr:9.0.2
 
   - name: metallb-config-component
     description: "Load balancer config for actually balancing loads"
