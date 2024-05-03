@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.29.2/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: metallb-package
+  description: "metallb"
+  architecture: amd64
+  version: v0.14.5
+
+components:
+
+  - name: metallb-namespace-component
+    description: "Namespace for MetalLB (disable istio injection)"
+    manifests:
+    - name: metallb-namespace-manifest
+      files:
+        - manifests/metallb/namespace.yaml
+
+  - name: metallb-component
+    description: "Upstream Helm chart for MetalLB Application"
+    required: true
+    charts:
+      - name: metallb-chart
+        url:  https://github.com/metallb/metallb.git
+        gitPath: charts/metallb
+        version: v0.14.5
+        namespace: metallb-system
+    images:
+      - quay.io/metallb/speaker:v0.14.5
+      - quay.io/metallb/controller:v0.14.5
+
+  - name: metallb-config-component
+    description: "Load balancer config for actually balancing loads"
+    required: true
+    charts:
+      - name: metallb-config-chart
+        localPath: ./charts/metallb-config/
+        version: 0.0.1
+        namespace: metallb-system

@@ -1,0 +1,5 @@
+# IP addresses to be used for load balancers utilizing metallb
+ipAddressPool: ""
+
+# Network interface that metallb will advertise on
+interface: ""
