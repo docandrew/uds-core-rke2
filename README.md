@@ -41,11 +41,29 @@ make certs
 
 Note that they will be set up to use the domain name `uds-core.lan` by default.
 
+### Authenticate with ghcr.io
+
+Recommended:
+
+`gh auth token | docker login ghcr.io --username <username> --password-stdin`
+
+Or create a personal access token and use that:
+
+`docker login ghcr.io --username <username> --password <token>`
+
 ### Bundle Creation
 
 `uds run create-bundle`
 
 ### Bundle Deployment
+
+Deploy Zarf:
+
+`uds zarf init`
+
+Deploy this UDS Bundle:
+
+`uds deploy bundles/uds-bundle-uds-core-rke2-bundle-amd64-0.21.1.tar.zst`
 
 ## Organization of the UDS Core RKE2 Bundle
 
