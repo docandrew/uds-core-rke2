@@ -12,7 +12,7 @@ packages:
 
   - name: metallb-package
     path: ../build/
-    ref: v0.13.7
+    ref: v0.14.5
     overrides:
       metallb-config-component:
         metallb-config-chart:
@@ -24,6 +24,10 @@ packages:
             - name: METALLB_INTERFACE
               path: interface
               description: "Interface used for L2 advertisements"
+
+  - name: exemptions-package
+    path: ../build/
+    ref: v0.0.1
 
   - name: uds-core
     repository: oci://ghcr.io/defenseunicorns/packages/uds/core

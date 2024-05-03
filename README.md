@@ -43,7 +43,7 @@ Note that they will be set up to use the domain name `uds-core.lan` by default.
 
 ### Bundle Creation
 
-
+`uds run create-bundle`
 
 ### Bundle Deployment
 
