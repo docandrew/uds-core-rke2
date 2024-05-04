@@ -6,10 +6,6 @@ metadata:
   version: 0.21.1
 
 packages:
-  # - name: init-longhorn
-  #   repository: oci://ghcr.io/naps-dev/packages/init-longhorn
-  #   ref: v0.32.4
-
   - name: metallb-package
     path: ../build/
     ref: v0.14.5

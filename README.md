@@ -1,5 +1,5 @@
                                            
-# WORK IN PROGRESS - DOES NOT BUILD YET
+# WORK IN PROGRESS - YOU MAY HAVE ISSUES WITH THIS PACKAGE, NOT FOR PRODUCTION
 
 ## UDS Core RKE2 Example Bundle
 
