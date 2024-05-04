@@ -22,6 +22,19 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 
 ## Installation
 
+### Terminate RKE2 Metrics Server
+
+UDS Core provides it's own metrics server, and the Helm installation of the
+UDS Core metrics server conflicts with the namespace of the RKE2 deployment.
+Terminate the RKE2 metrics server _and_ **remove the helmchart object** or, 
+if you're starting a new cluster, use this snippet in /etc/rancher/rke2/config.yaml:
+
+```yaml
+# /etc/rancher/rke2/config.yaml
+disable:
+  - rke2-metrics-server
+```
+
 ### Modify Bundle Configuration
 
 You'll probably want to set your own domain name for the cluster. This can be
@@ -36,7 +49,7 @@ top-level folder of this repo and name the files `tls.cert` and `tls.key`.
 Otherwise, you can create a self-signed set yourself with:
 
 ```shell
-make certs
+uds run certs
 ```
 
 Note that they will be set up to use the domain name `uds-core.lan` by default.
@@ -130,7 +143,7 @@ Deploy this UDS Bundle:
      └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Naming conventions
+## Naming conventions
 
 UDS Bundles contain Zarf Packages which contain Zarf Components. Zarf components
 in turn can contain images, Helm charts, and manifests. This repo tries to be
@@ -138,3 +151,21 @@ explicit with the naming of each of these resources. So for example, the Zarf
 package for Pepr Exemptions is called `exemptions-package`, and it contains
 a Zarf component called `exemptions-component`. This is to make it easy to
 understand the organization of each of these resources.
+
+## Issues
+
+Depending on the version of Kubernetes being used, the UDS Core bundle may
+deploy Istio proxy inside some of the Job pods. Because it's a sidecar, it
+never exits and the Job will not complete. You may have to manually enter the
+pod in debug mode and tell the istio-proxy container to exit.
+
+```shell
+$ kubectl debug -it -n <namespace> <pod-name> --image=busybox
+```
+
+Then inside the pod:
+
+```shell
+$ wget -q --post-data='' -S -O /dev/null http://127.0.0.1:15020/quitquitquit
+$ exit
+```

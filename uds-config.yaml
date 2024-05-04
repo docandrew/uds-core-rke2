@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/main/uds.schema.json
 options:
-   log_level: debug
+   log_level: warn
    architecture: amd64
    no_log_file: false
-   no_progress: false
+   no_progress: true
    uds_cache: /tmp/uds-cache
    tmp_dir: /tmp/tmp_dir
    insecure: false

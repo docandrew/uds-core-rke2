@@ -10,9 +10,12 @@ components:
 
   - name: exemptions-component
     description: "Custom Resource definitions for UDS Core RKE2 Pepr policy exemptions"
+    required: true
     manifests:
     - name: exemptions-manifests
+      namespace: uds-policy-exemptions
       files:
+        - manifests/exemption-namespace.yaml
         - manifests/local-path-storage-exemption.yaml
         - manifests/longhorn-exemption.yaml
         - manifests/metallb-exemption.yaml

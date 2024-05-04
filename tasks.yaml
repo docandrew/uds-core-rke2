@@ -7,3 +7,21 @@ tasks:
       - description: "Create the UDS Core RKE2 Bundle"
         task: create:create-uds-bundle
    
+  - name: clean
+    actions:
+      - description: "Remove build artifacts"
+        cmd: |
+          rm -rf build/
+          rm bundles/*.tar.zst
+  
+  - name: rm-rke2-metrics-server
+    actions:
+      - description: "Remove the RKE2 metrics server"
+        cmd: |
+          uds zarf tools kubectl delete deployment rke2-metrics-server -n kube-system
+          uds zarf tools kubectl delete helmchart rke2-metrics-server -n kube-system
+  
+  - name: certs
+    actions:
+      - description: "Generate self-signed certs for testing"
+        cmd: openssl req -x509 -newkey rsa:4096 -keyout tls.key -out tls.cert -days 365 -nodes -config tls-cert.conf > /dev/null 2>&1

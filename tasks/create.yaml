@@ -3,9 +3,9 @@ tasks:
     description: Create child Zarf packages
     actions:
       - description: "Create the exemptions Zarf package"
-        cmd: uds zarf package create packages/exemptions --confirm --no-progress -o build/
+        cmd: uds zarf package create packages/exemptions --confirm --no-progress --skip-sbom -o build/
       - description: "Create the MetalLB Zarf package"
-        cmd: uds zarf package create packages/metallb --confirm --no-progress -o build/
+        cmd: uds zarf package create packages/metallb --confirm --no-progress --skip-sbom -o build/
 
   - name: create-uds-bundle
     description: Create the UDS Core bundle

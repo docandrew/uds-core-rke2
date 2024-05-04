@@ -10,6 +10,7 @@ components:
 
   - name: metallb-namespace-component
     description: "Namespace for MetalLB (disable istio injection)"
+    required: true
     manifests:
     - name: metallb-namespace-manifest
       files:
